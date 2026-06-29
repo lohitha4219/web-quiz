@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Dev Quiz</title>
+
+    <link rel="icon" href="./logo.jpg">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div class="bg-animated"></div>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="header">
+
+        <div class="container header-inner">
+
+            <div class="brand">
+
+                <div class="logo">
+                    <img src="./logo.png" alt="College Logo">
+                </div>
+
+                <div class="title">
+                    <h1 class="name">KUPPAM DEGREE COLLEGE</h1>
+                    <p class="tag">Web Dev Quiz</p>
+                </div>
+
+            </div>
+
+            <div class="right-section">
+
+                <button id="logoutBtn">
+                    Logout
+                </button>
+
+                <div class="scoreboard">
+
+                    <div id="progressText">
+                        Question 1 / 200
+                    </div>
+
+                    <div class="progressBar">
+                        <div id="progressFill"></div>
+                    </div>
+
+                    <div id="scoreTop" class="score-top">
+                        Score: 0
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="container">
+
+        <section id="quizApp" class="card">
+
+            <!-- Timer -->
+
+            <div class="timer-row">
+
+                <div id="timeText" class="time-text">
+                    Time Left: 20s
+                </div>
+
+                <div class="time-bar">
+
+                    <div id="timeFill"></div>
+
+                </div>
+
+            </div>
+
+            <!-- Question -->
+
+            <div class="question-area">
+
+                <h2 id="questionNumber">
+                    Q 1
+                </h2>
+
+                <p id="questionText" class="question-text">
+                    Loading Question...
+                </p>
+
+            </div>
+
+            <!-- Options -->
+
+            <div id="options" class="options">
+
+            </div>
+
+            <!-- Buttons -->
+
+            <div class="controls">
+
+                <button id="nextBtn" class="btn">
+                    Next
+                </button>
+
+                <button id="quitBtn" class="btn ghost">
+                    Quit
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- ================= RESULT MODAL ================= -->
+
+    <div id="resultModal" class="modal hidden">
+
+        <div class="modal-card">
+
+            <div id="resultEmoji" class="result-emoji">
+                🎉
+            </div>
+
+            <h2 id="resultTitle">
+                Quiz Completed
+            </h2>
+
+            <p id="resultText">
+                Your Score : 0
+            </p>
+
+            <div class="result-actions">
+
+                <button id="retryBtn" class="btn ghost">
+                    Retry
+                </button>
+
+                <button id="downloadBtn" class="btn">
+                    Download Certificate
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+
+    <script>
+        // Login gate + working logout
+        window.__webquizAuth && window.__webquizAuth.requireLogin({
+            redirectTo: "./login.html"
+        });
+
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', () => {
+                try {
+                    if (window.__webquizAuth && typeof window.__webquizAuth.logout === 'function') {
+                        window.__webquizAuth.logout();
+                    }
+                } catch (e) {
+                    // still redirect
+                }
+                window.location.href = "./login.html";
+            });
+        }
+    </script>
+
+</body>
+
+
+</html>

@@ -1,0 +1,249 @@
+/* ==========================
+   AUTH PAGES (login/signup/forgot)
+========================== */
+
+.auth-page{
+
+    min-height:100vh;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:42px 0;
+
+}
+
+.auth-card{
+
+    width:100%;
+
+    max-width:520px;
+
+    background:rgba(17,29,49,.78);
+
+    backdrop-filter:blur(10px);
+
+    border:1px solid rgba(255,255,255,.06);
+
+    border-radius:24px;
+
+    padding:34px;
+
+    box-shadow:0 25px 70px rgba(0,0,0,.45);
+
+}
+
+.auth-brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    margin-bottom:18px;
+
+}
+
+.auth-logo img{
+
+    width:64px;
+
+    height:64px;
+
+    border-radius:50%;
+
+}
+
+.auth-title{
+
+    font-size:2rem;
+
+    font-weight:800;
+
+    color:#ffffff;
+
+}
+
+.auth-subtitle{
+
+    margin-top:6px;
+
+    font-size:15px;
+
+    line-height:1.35;
+
+}
+
+.muted{
+
+    color:var(--muted);
+
+}
+
+.auth-form{
+
+    margin-top:16px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:14px;
+
+}
+
+.auth-label{
+
+    font-size:14px;
+
+    font-weight:700;
+
+    color:#d9e6ff;
+
+}
+
+.auth-form input{
+
+    width:100%;
+
+    padding:14px 14px;
+
+    border-radius:14px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    background:rgba(11,21,43,.55);
+
+    color:var(--text);
+
+    outline:none;
+
+    transition:.2s;
+
+}
+
+.auth-form input::placeholder{
+
+    color:rgba(234,242,255,.55);
+
+}
+
+.auth-form input:focus{
+
+    border-color:rgba(124,58,237,.6);
+
+    box-shadow:0 0 0 4px rgba(124,58,237,.18);
+
+    background:rgba(11,21,43,.75);
+
+}
+
+.auth-btn{
+
+    margin-top:6px;
+
+    width:100%;
+
+}
+
+.auth-linkrow{
+
+    font-size:14px;
+
+
+}
+
+.auth-link{
+
+     color:#2EF29C0;
+
+    text-decoration:underline;
+
+    font-weight:800;
+
+}
+
+.auth-link:hover{
+
+    color:#2EF29C;
+
+}
+
+.auth-banner{
+
+    padding:12px 14px;
+
+    border-radius:14px;
+
+    font-weight:800;
+
+    font-size:14px;
+
+    margin-bottom:10px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+}
+
+.auth-banner-error{
+
+    background:rgba(229,59,59,.14);
+
+    color:#ffd6d6;
+
+    border-color:rgba(255,93,93,.35);
+
+}
+
+.auth-banner-success{
+
+    background:rgba(35,208,96,.14);
+
+    color:#d9ffe7;
+
+    border-color:rgba(35,208,96,.35);
+
+}
+
+.reveal{
+
+    opacity:0;
+
+    transform:translateY(10px);
+
+    transition:opacity .55s ease, transform .55s ease;
+
+}
+
+.reveal.in-view,
+.reveal.in-view *{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+/* keep quiz buttons same base .btn but ensure auth overrides */
+.btn.auth-btn{
+
+    border:none;
+
+}
+
+@media(max-width:600px){
+
+    .auth-card{
+
+        padding:22px;
+
+        border-radius:18px;
+
+    }
+
+}
+

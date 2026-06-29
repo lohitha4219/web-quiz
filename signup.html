@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Web Dev Quiz - Sign up</title>
+  <link rel="icon" href="./logo.jpg" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="bg-animated" aria-hidden="true"></div>
+
+  <main class="auth-page">
+    <section class="auth-card reveal">
+      <div class="auth-brand">
+        <div class="auth-logo"><img src="./logo.png" alt=""></div>
+        <div>
+          <h1 class="auth-title">Create your account</h1>
+          <p class="auth-subtitle muted">Sign up to start your Web Dev Quiz.</p>
+        </div>
+      </div>
+
+      <div id="authBanner" class="auth-banner hidden" role="alert"></div>
+
+      <form id="signupForm" class="auth-form" autocomplete="on">
+        <label for="signupEmail" class="auth-label">Email</label>
+        <input id="signupEmail" name="email" type="email" required placeholder="enter your mail id" />
+
+        <label for="signupPassword" class="auth-label">Password</label>
+        <input id="signupPassword" name="password" type="password" required placeholder="enter your password" minlength="6" />
+
+        <label for="signupConfirmPassword" class="auth-label">Confirm password</label>
+        <input id="signupConfirmPassword" name="confirmPassword" type="password" required placeholder="re-enter your password" minlength="6" />
+
+        <button type="submit" class="btn auth-btn">Sign up</button>
+
+        <p class="auth-linkrow muted" style="justify-content:center;gap:12px;">
+          <span>
+            Already have an account?
+            <a class='auth-link' href='./login.html'>Log in</a>
+          </span>
+        </p>
+      </form>
+    </section>
+  </main>
+
+  <script src="./auth.js"></script>
+  <script>
+    const form = document.getElementById('signupForm');
+    const banner = document.getElementById('authBanner');
+
+    const showBanner = (msg, type) => {
+      banner.classList.remove('hidden');
+      banner.textContent = msg;
+      banner.classList.toggle('auth-banner-error', type === 'error');
+      banner.classList.toggle('auth-banner-success', type === 'success');
+    };
+
+    const clearBanner = () => {
+      if (!banner) return;
+      banner.classList.add('hidden');
+      banner.classList.remove('auth-banner-error', 'auth-banner-success');
+      banner.textContent = '';
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearBanner();
+
+      const email = document.getElementById('signupEmail').value;
+      const password = document.getElementById('signupPassword').value;
+      const confirmPassword = document.getElementById('signupConfirmPassword').value;
+
+      if (password !== confirmPassword) {
+        showBanner('Passwords do not match', 'error');
+        return;
+      }
+
+      try {
+        await window.__webquizAuth.register({ email, password });
+        showBanner('Account created. Redirecting to login…', 'success');
+        setTimeout(() => {
+          window.location.href = './login.html';
+        }, 450);
+      } catch (err) {
+        showBanner(err?.message || 'Sign up failed', 'error');
+      }
+    });
+
+    // reveal observer (matches quiz page behavior)
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (en.isIntersecting) en.target.classList.add('in-view');
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(r => io.observe(r));
+  </script>
+</body>
+</html>
+
